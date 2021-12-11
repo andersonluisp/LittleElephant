@@ -1,15 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdk globalConfiguration["compileSDK"]
 
     defaultConfig {
         applicationId "br.andersonpimentel.littleelephant"
-        minSdk 21
-        targetSdk 31
+        minSdk globalConfiguration["minSDK"]
+        targetSdk globalConfiguration["targetSDK"]
         versionCode 1
         versionName "1.0"
 
@@ -29,15 +33,38 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures{
+        viewBinding true
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    implementation dependencies.ktx
+    implementation dependencies.appCompat
+    implementation dependencies.coroutinesCore
+    implementation dependencies.coroutinesAndroid
+    implementation dependencies.viewModel
+    implementation dependencies.material
+    implementation dependencies.constraintLayout
+    implementation dependencies.koin
+    implementation dependencies.koinCore
+    implementation dependencies.koinViewModel
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitGsonConverter
+    implementation dependencies.gson
+    implementation dependencies.room
+    kapt dependencies.roomCompiler
+    implementation dependencies.roomKtx
+    implementation dependencies.glide
+    annotationProcessor dependencies.glideCompiler
+
+
+    testImplementation testDependencies.junit
+    androidTestImplementation testDependencies.runner
+    androidTestImplementation testDependencies.espresso
 }
