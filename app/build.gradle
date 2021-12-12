@@ -62,6 +62,7 @@ dependencies {
     implementation dependencies.roomKtx
     implementation dependencies.glide
     annotationProcessor dependencies.glideCompiler
+    implementation dependencies.adapterDelegates
 
 
     testImplementation testDependencies.junit
