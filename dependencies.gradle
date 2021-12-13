@@ -19,6 +19,7 @@ ext {
     retrofitVersion = '2.9.0'
     roomVersion = '2.3.0'
     adapterDelegatesVersion = '4.3.1'
+    lottieVersion = '4.2.2'
 
     //Test
     junitVersion = '4.+'
@@ -53,6 +54,9 @@ ext {
             //Glide
             glide: "com.github.bumptech.glide:glide:$glideVersion",
             glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
+
+            //Lottie Animations
+            lottie: "com.airbnb.android:lottie:$lottieVersion",
 
             //AdapterDelegates
             adapterDelegates: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
