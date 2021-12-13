@@ -2,11 +2,11 @@ package br.andersonpimentel.littleelephant.domain.usecases
 
 import br.andersonpimentel.littleelephant.domain.entities.Tile
 
-interface GetMockedMapInterface {
+interface GetMockedMapUseCaseInterface {
     fun execute(): List<Tile>
 }
 
-class GetMockedMap: GetMockedMapInterface {
+class GetMockedMapUseCase: GetMockedMapUseCaseInterface {
     override fun execute(): List<Tile> {
         return listOf(
             Tile.GrassTile(hasTree = true), Tile.GrassTile(), Tile.RoadVerticalTile, Tile.GrassTile(),

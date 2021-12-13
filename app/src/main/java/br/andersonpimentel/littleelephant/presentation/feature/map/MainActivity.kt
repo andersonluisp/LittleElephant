@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
-import br.andersonpimentel.littleelephant.domain.usecases.GetMockedMap
+import br.andersonpimentel.littleelephant.domain.usecases.GetMockedMapUseCase
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.MapTilesAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             it.layoutManager = GridLayoutManager(this, 4).apply {
                 reverseLayout = true
             }
-            adapter.items = GetMockedMap().execute()
+            adapter.items = GetMockedMapUseCase().execute()
             it.adapter = adapter
         }
 
