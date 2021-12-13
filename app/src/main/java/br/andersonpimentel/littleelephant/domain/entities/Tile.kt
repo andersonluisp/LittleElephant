@@ -3,14 +3,15 @@ package br.andersonpimentel.littleelephant.domain.entities
 import android.graphics.drawable.GradientDrawable
 
 sealed class Tile {
-    object BottomTurnRightTile : Tile()
-    object BottomTurnLeftTile : Tile()
-    object TopTurnRightTile : Tile()
-    object TopTurnLeftTile : Tile()
+    object BottomToRightTile : Tile()
+    object BottomToLeftTile : Tile()
+    object TopToRightTile : Tile()
+    object TopToLeftTile : Tile()
     object RoadHorizontalTile : Tile()
     object RoadVerticalTile : Tile()
-    object GrassTile : Tile()
-    object TreeTile: Tile()
+    data class GrassTile(
+        val hasTree: Boolean = false
+    ): Tile()
 
     data class StepTile(
         val orientation: Orientation,
