@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tile_grass"
     tools:context=".presentation.feature.map.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,7 @@
         tools:listitem="@layout/item_tile_layout"
         tools:itemCount="10"
         android:overScrollMode="never"
-        tools:spanCount="5"
+        tools:spanCount="4"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
