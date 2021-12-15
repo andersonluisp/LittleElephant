@@ -64,6 +64,7 @@ dependencies {
     annotationProcessor dependencies.glideCompiler
     implementation dependencies.adapterDelegates
     implementation dependencies.lottie
+    implementation dependencies.balloon
 
 
     testImplementation testDependencies.junit

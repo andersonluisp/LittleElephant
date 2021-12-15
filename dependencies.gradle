@@ -20,6 +20,7 @@ ext {
     roomVersion = '2.3.0'
     adapterDelegatesVersion = '4.3.1'
     lottieVersion = '4.2.2'
+    balloonVersion = '1.4.0'
 
     //Test
     junitVersion = '4.+'
@@ -57,6 +58,9 @@ ext {
 
             //Lottie Animations
             lottie: "com.airbnb.android:lottie:$lottieVersion",
+
+            //Balloon Tooltip
+            balloon: "com.github.skydoves:balloon:$balloonVersion",
 
             //AdapterDelegates
             adapterDelegates: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
