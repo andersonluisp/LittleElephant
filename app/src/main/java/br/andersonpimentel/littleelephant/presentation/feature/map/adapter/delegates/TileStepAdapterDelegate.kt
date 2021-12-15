@@ -8,11 +8,10 @@ import br.andersonpimentel.littleelephant.databinding.ItemStepLayoutBinding
 import br.andersonpimentel.littleelephant.domain.entities.Tile
 import br.andersonpimentel.littleelephant.presentation.util.load
 import com.airbnb.lottie.LottieDrawable
-import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
 object TileStepAdapterDelegate {
-    operator fun invoke(itemClickListener: (Tile.StepTile) -> Unit) =
+    operator fun invoke(itemClickListener: (View, Tile.StepTile) -> Unit) =
         adapterDelegateViewBinding<Tile.StepTile, Tile, ItemStepLayoutBinding>(
             { layoutInflater, root -> ItemStepLayoutBinding.inflate(layoutInflater, root, false) }
         ) {
@@ -21,7 +20,7 @@ object TileStepAdapterDelegate {
                     ivTile.load(setStepTileDrawable(item))
                     tvStepNumber.text = item.step.toString()
                     root.setOnClickListener {
-                        itemClickListener(item)
+                        itemClickListener(root, item)
                     }
                     showElephant(item, this)
                 }
