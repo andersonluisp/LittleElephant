@@ -16,11 +16,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:contentDescription="" />
 
+
     <TextView
         android:id="@+id/tv_step_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         tools:text="1"
@@ -29,5 +30,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/elephant_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_elephant"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
