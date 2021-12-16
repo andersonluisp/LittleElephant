@@ -6,10 +6,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import br.andersonpimentel.littleelephant.R
 import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
 import br.andersonpimentel.littleelephant.databinding.TooltipLayoutBinding
-import br.andersonpimentel.littleelephant.domain.usecases.GetMockedMapUseCase
+import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
+import br.andersonpimentel.littleelephant.domain.usecases.GetStepTileMessages
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.MapTilesAdapter
+import br.andersonpimentel.littleelephant.presentation.util.showToolTip
 import com.skydoves.balloon.*
 import kotlinx.android.synthetic.main.tooltip_layout.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +28,8 @@ class MainActivity : AppCompatActivity() {
             if (tooltip.isShowing) {
                 tooltip.dismiss()
             }
-            tooltip.showAlignTop(view)
+            tooltipBinding.tvMessage.text = item.message
+            tooltip.showToolTip(view)
         }
     }
 
@@ -73,8 +80,13 @@ class MainActivity : AppCompatActivity() {
                 reverseLayout = true
             }
             it.itemAnimator = null
-            adapter.items = GetMockedMapUseCase().execute()
-            it.adapter = adapter
+            val getMapUseCase = GetMapUseCase(GetStepTileMessages())
+            CoroutineScope(Dispatchers.Main).launch {
+                getMapUseCase().collect { tiles ->
+                    adapter.items = tiles
+                    it.adapter = adapter
+                }
+            }
         }
 
     }
