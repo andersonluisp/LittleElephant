@@ -1,7 +1,5 @@
 package br.andersonpimentel.littleelephant.domain.entities
 
-import android.graphics.drawable.GradientDrawable
-
 sealed class Tile {
     object BottomToRightTile : Tile()
     object BottomToLeftTile : Tile()
@@ -16,7 +14,8 @@ sealed class Tile {
     data class StepTile(
         val orientation: Orientation,
         val step: Int,
-        var hasElephant: Boolean = false
+        var hasElephant: Boolean = false,
+        var message: String? = null
     ): Tile()
 
     enum class Orientation {
