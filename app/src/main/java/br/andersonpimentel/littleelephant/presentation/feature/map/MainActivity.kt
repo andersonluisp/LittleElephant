@@ -10,7 +10,7 @@ import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
 import br.andersonpimentel.littleelephant.databinding.TooltipLayoutBinding
 import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
 import br.andersonpimentel.littleelephant.domain.usecases.GetStepMessagesUseCase
-import br.andersonpimentel.littleelephant.domain.usecases.GetStepTilesUseCase
+import br.andersonpimentel.littleelephant.domain.usecases.GetTilesUseCase
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.MapTilesAdapter
 import br.andersonpimentel.littleelephant.presentation.util.showToolTip
 import com.skydoves.balloon.*
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 reverseLayout = true
             }
             it.itemAnimator = null
-            val getMapUseCase = GetMapUseCase(GetStepMessagesUseCase(repository = MessagesRepository(remoteDataSource)), GetStepTilesUseCase())
+            val getMapUseCase = GetMapUseCase(GetStepMessagesUseCase(repository = MessagesRepository(remoteDataSource)), GetTilesUseCase())
             CoroutineScope(Dispatchers.IO).launch {
                 getMapUseCase().collect { map ->
                     adapter.items = map.tiles

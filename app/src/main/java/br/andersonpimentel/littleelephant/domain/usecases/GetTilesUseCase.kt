@@ -4,7 +4,7 @@ import br.andersonpimentel.littleelephant.domain.entities.Tile
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class GetStepTilesUseCase {
+class GetTilesUseCase {
     operator fun invoke(): Flow<List<Tile>> {
         return flowOf(listOf(
             Tile.GrassTile(hasTree = true), Tile.GrassTile(), Tile.RoadVerticalTile, Tile.GrassTile(),

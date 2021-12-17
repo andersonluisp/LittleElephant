@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.*
 
 class GetMapUseCase(
     private val useCaseGetStepMessages: GetStepMessagesUseCase,
-    private val useCaseGetStepTiles: GetStepTilesUseCase
+    private val useCaseGetTiles: GetTilesUseCase
     ) {
     suspend operator fun invoke(): Flow<Map> {
         return flowOf(Map(
-            tiles = useCaseGetStepTiles().zip(useCaseGetStepMessages()){ tiles, messages ->
+            tiles = useCaseGetTiles().zip(useCaseGetStepMessages()){ tiles, messages ->
                 tiles.apply {
                     if(messages is GetStepMessagesUseCase.ResultMessages.Messages){
                         filterIsInstance<Tile.StepTile>().forEachIndexed { index, tile ->
