@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import br.andersonpimentel.littleelephant.R
+import br.andersonpimentel.littleelephant.data.remote.repository.MessagesRepository
+import br.andersonpimentel.littleelephant.data.remote.source.RemoteDataSource
 import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
 import br.andersonpimentel.littleelephant.databinding.TooltipLayoutBinding
 import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
-import br.andersonpimentel.littleelephant.domain.usecases.GetStepTileMessages
+import br.andersonpimentel.littleelephant.domain.usecases.GetStepMessagesUseCase
+import br.andersonpimentel.littleelephant.domain.usecases.GetStepTilesUseCase
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.MapTilesAdapter
 import br.andersonpimentel.littleelephant.presentation.util.showToolTip
 import com.skydoves.balloon.*
@@ -16,12 +19,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var tooltipBinding: TooltipLayoutBinding
     private lateinit var tooltip: Balloon
+    private val remoteDataSource: RemoteDataSource by inject()
 
     private val adapter = MapTilesAdapter { view, item ->
         if (!item.hasElephant) {
@@ -80,10 +85,10 @@ class MainActivity : AppCompatActivity() {
                 reverseLayout = true
             }
             it.itemAnimator = null
-            val getMapUseCase = GetMapUseCase(GetStepTileMessages())
-            CoroutineScope(Dispatchers.Main).launch {
-                getMapUseCase().collect { tiles ->
-                    adapter.items = tiles
+            val getMapUseCase = GetMapUseCase(GetStepMessagesUseCase(repository = MessagesRepository(remoteDataSource)), GetStepTilesUseCase())
+            CoroutineScope(Dispatchers.IO).launch {
+                getMapUseCase().collect { map ->
+                    adapter.items = map.tiles
                     it.adapter = adapter
                 }
             }
