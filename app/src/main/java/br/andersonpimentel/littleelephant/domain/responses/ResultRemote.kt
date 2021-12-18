@@ -1,6 +1,6 @@
 package br.andersonpimentel.littleelephant.domain.responses
 
-sealed class ResultRemote<out T> {
+sealed class ResultRemote<out T>() {
     data class Success<out T>(val response: T): ResultRemote<T>()
 
     sealed class ErrorResponse(open val throwable: Throwable): ResultRemote<Nothing>(){

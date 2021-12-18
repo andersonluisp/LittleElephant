@@ -76,11 +76,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         viewModel.state.observe(this) {
-            when (it) {
-                is ViewState.Success -> {
-                    adapter.items = it.data.tiles
-                    setupRecyclerview()
-                }
+            if (it is ViewState.Success) {
+                adapter.items = it.data.tiles
+                setupRecyclerview()
             }
         }
     }
