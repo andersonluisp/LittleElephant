@@ -3,40 +3,25 @@ package br.andersonpimentel.littleelephant.presentation.feature.map
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.andersonpimentel.littleelephant.R
-import br.andersonpimentel.littleelephant.data.remote.repository.MessagesRepository
-import br.andersonpimentel.littleelephant.data.remote.source.RemoteDataSource
 import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
 import br.andersonpimentel.littleelephant.databinding.TooltipLayoutBinding
-import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
-import br.andersonpimentel.littleelephant.domain.usecases.GetStepMessagesUseCase
-import br.andersonpimentel.littleelephant.domain.usecases.GetTilesUseCase
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.MapTilesAdapter
+import br.andersonpimentel.littleelephant.presentation.feature.viewmodel.ViewState
+import br.andersonpimentel.littleelephant.presentation.util.setMessage
 import br.andersonpimentel.littleelephant.presentation.util.showToolTip
 import com.skydoves.balloon.*
 import kotlinx.android.synthetic.main.tooltip_layout.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var tooltipBinding: TooltipLayoutBinding
     private lateinit var tooltip: Balloon
-    private val remoteDataSource: RemoteDataSource by inject()
-
-    private val adapter = MapTilesAdapter { view, item ->
-        if (!item.hasElephant) {
-            if (tooltip.isShowing) {
-                tooltip.dismiss()
-            }
-            tooltipBinding.tvMessage.text = item.message
-            tooltip.showToolTip(view)
-        }
-    }
+    private lateinit var adapter: MapTilesAdapter
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +34,35 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setContentView(binding.root)
-
+        setupAdapter()
         setupTooltip()
-        setupRecyclerview()
+        setupObservers()
+    }
+
+    private fun setupAdapter() {
+        adapter = MapTilesAdapter { view, stepTile ->
+            if (!stepTile.hasElephant) {
+                tooltipBinding.setMessage(stepTile.message.toString())
+                viewModel.setLastElephantPosition(stepTile)
+                if (tooltip.isShowing) {
+                    tooltip.dismiss()
+                }
+                tooltip.showToolTip(view)
+            } else{
+                tooltip.showToolTip(view)
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.state.observe(this) {
+            when (it) {
+                is ViewState.Success -> {
+                    adapter.items = it.data.tiles
+                    setupRecyclerview()
+                }
+            }
+        }
     }
 
     private fun setupTooltip(): Balloon {
@@ -85,14 +96,13 @@ class MainActivity : AppCompatActivity() {
                 reverseLayout = true
             }
             it.itemAnimator = null
-            val getMapUseCase = GetMapUseCase(GetStepMessagesUseCase(repository = MessagesRepository(remoteDataSource)), GetTilesUseCase())
-            CoroutineScope(Dispatchers.IO).launch {
-                getMapUseCase().collect { map ->
-                    adapter.items = map.tiles
-                    it.adapter = adapter
+            it.adapter = adapter
+            it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    tooltip.dismiss()
                 }
-            }
+            })
         }
-
     }
 }

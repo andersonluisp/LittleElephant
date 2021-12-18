@@ -1,8 +1,8 @@
 package br.andersonpimentel.littleelephant.presentation.util
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import br.andersonpimentel.littleelephant.databinding.TooltipLayoutBinding
 import com.bumptech.glide.Glide
 import com.skydoves.balloon.Balloon
 
@@ -20,4 +20,8 @@ fun Balloon.showToolTip(view: View){
     } else {
         this.showAlignBottom(view)
     }
+}
+
+fun TooltipLayoutBinding.setMessage(message: String){
+    this.tvMessage.text = message
 }
