@@ -1,6 +1,6 @@
 package br.andersonpimentel.littleelephant.domain.usecases
 
-import br.andersonpimentel.littleelephant.data.remote.repository.MessagesRepository
+import br.andersonpimentel.littleelephant.data.repository.MessagesRepository
 import br.andersonpimentel.littleelephant.domain.entities.Message
 import br.andersonpimentel.littleelephant.domain.responses.ResultRequired
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +10,7 @@ class GetStepMessagesUseCase(
     private val repository: MessagesRepository
 ){
     suspend operator fun invoke(): Flow<ResultMessages> {
-        return repository.getFactsRemote()
+        return repository.getMessages()
             .map{
                 when(it) {
                     is ResultRequired.Success -> {
