@@ -15,7 +15,7 @@ ext {
 
     glideVersion = '4.12.0'
     gsonVersion = '2.8.9'
-    koinVersion = '2.2.3'
+    koinVersion = '2.0.1'
     retrofitVersion = '2.9.0'
     roomVersion = '2.3.0'
     adapterDelegatesVersion = '4.3.1'
@@ -38,9 +38,9 @@ ext {
             constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
 
             //Koin
-            koin: "io.insert-koin:koin-android:$koinVersion",
-            koinCore: "io.insert-koin:koin-core:$koinVersion",
-            koinViewModel: "io.insert-koin:koin-androidx-viewmodel:$koinVersion",
+            koin: "org.koin:koin-android:$koinVersion",
+            koinCore: "org.koin:koin-core:$koinVersion",
+            koinViewModel: "org.koin:koin-androidx-viewmodel:$koinVersion",
 
             //Retrofit
             retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -50,6 +50,7 @@ ext {
             //Room
             room: "androidx.room:room-runtime:$roomVersion",
             roomCompiler: "androidx.room:room-compiler:$roomVersion",
+            roomArch: "android.arch.persistence.room:runtime:$roomVersion",
             roomKtx: "androidx.room:room-ktx:$roomVersion",
 
             //Glide
@@ -71,7 +72,7 @@ ext {
             junit: "junit:junit:$junitVersion",
             extJunit: "androidx.test.ext:$extJunitVersion",
             espresso: "androidx.test.espresso:$espressoVersion",
-            koinTest: "io.insert-koin:koin-test:$koinVersion",
+            koinTest: "org.koin:koin-test:$koinVersion",
             runner: "androidx.test:runner:$runnerVersion"
     ]
 }
