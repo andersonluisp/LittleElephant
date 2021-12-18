@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.map
 
 class GetStepMessagesUseCase(
     private val repository: MessagesRepository
-){
+) {
     suspend operator fun invoke(): Flow<ResultMessages> {
         return repository.getMessages()
-            .map{
-                when(it) {
+            .map {
+                when (it) {
                     is ResultRequired.Success -> {
-                        when{
+                        when {
                             it.result.isEmpty() -> ResultMessages.NoMessages
                             else -> ResultMessages.Messages(it.result)
                         }
@@ -22,6 +22,7 @@ class GetStepMessagesUseCase(
                     is ResultRequired.Error -> {
                         ResultMessages.Error
                     }
+                    is ResultRequired.Empty -> ResultMessages.NoMessages
                 }
             }
     }
