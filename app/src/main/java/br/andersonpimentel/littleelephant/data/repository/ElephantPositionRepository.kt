@@ -30,7 +30,7 @@ class ElephantPositionRepository(
                         "***LittleElephant",
                         "ElephantPositionRepository | getLastElephantPosition | The elephant has not a position yet"
                     )
-                    ResultRequired.Error(e)
+                    ResultRequired.Empty(e)
                 } catch (t: Throwable){
                     ResultRequired.Error(t)
                 }
