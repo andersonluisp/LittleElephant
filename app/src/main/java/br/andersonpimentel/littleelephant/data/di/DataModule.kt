@@ -2,6 +2,7 @@ package br.andersonpimentel.littleelephant.data.di
 
 import br.andersonpimentel.littleelephant.data.repository.ElephantPositionRepository
 import br.andersonpimentel.littleelephant.data.repository.MessagesRepository
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -9,7 +10,8 @@ val repositoryModule = module {
         MessagesRepository(
             messagesCacheDataSource = get(),
             dateCacheValidateDataSource = get(),
-            remoteDataSource = get()
+            remoteDataSource = get(),
+            context = androidContext()
         )
     }
 

@@ -1,5 +1,7 @@
 package br.andersonpimentel.littleelephant.data.repository
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import br.andersonpimentel.littleelephant.data.local.model.DateCacheValidate
 import br.andersonpimentel.littleelephant.data.local.source.DateCacheValidateDataSource
@@ -23,12 +25,14 @@ class MessagesRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val messagesCacheDataSource: MessagesCacheDataSource,
     private val dateCacheValidateDataSource: DateCacheValidateDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val context: Context
 ) {
     private suspend fun getFactsRemote(): ResultRequired<List<Message>> {
         return withContext(dispatcher) {
             when (val resultRemote = remoteDataSource.fetchMessages()) {
                 is ResultRemote.Success -> {
+                    context.sendBroadcast( Intent("ShowToast"))
                     val mappedList = resultRemote.response.toMessageModel()
                     val currentDate = Calendar.getInstance().timeInMillis
                     messagesCacheDataSource.updateMessages(mappedList.modelToMessageCache())

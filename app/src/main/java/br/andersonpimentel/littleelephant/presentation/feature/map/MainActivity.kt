@@ -1,6 +1,11 @@
 package br.andersonpimentel.littleelephant.presentation.feature.map
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tooltip: Balloon
     private lateinit var adapter: MapTilesAdapter
     private val viewModel: MainViewModel by viewModel()
+    private val apiBroadcastReceiver = ApiBroadcastReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,20 @@ class MainActivity : AppCompatActivity() {
         setupObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("ShowToast")
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT)
+        registerReceiver(apiBroadcastReceiver, intentFilter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(apiBroadcastReceiver)
+    }
+
+
     private fun setupAdapter() {
         adapter = MapTilesAdapter { view, stepTile ->
             if (!stepTile.hasElephant) {
@@ -48,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                     tooltip.dismiss()
                 }
                 tooltip.showToolTip(view)
-            } else{
+            } else {
                 tooltip.showToolTip(view)
             }
         }
@@ -103,6 +123,12 @@ class MainActivity : AppCompatActivity() {
                     tooltip.dismiss()
                 }
             })
+        }
+    }
+
+    inner class ApiBroadcastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Toast.makeText(context, "Api OK", Toast.LENGTH_LONG).show()
         }
     }
 }
