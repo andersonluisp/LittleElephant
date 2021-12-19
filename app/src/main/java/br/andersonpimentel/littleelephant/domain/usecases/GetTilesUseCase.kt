@@ -15,7 +15,13 @@ class GetTilesUseCase {
             Tile.GrassTile(), Tile.GrassTile(), Tile.GrassTile(hasTree = true), Tile.RoadVerticalTile,
             Tile.GrassTile(), Tile.TopToLeftTile, Tile.StepTile(Tile.Orientation.HORIZONTAL, 3), Tile.BottomToLeftTile,
             Tile.GrassTile(hasTree = true), Tile.RoadVerticalTile, Tile.GrassTile(), Tile.GrassTile(),
-            Tile.StepTile(Tile.Orientation.HORIZONTAL, 4), Tile.BottomToLeftTile, Tile.GrassTile(), Tile.GrassTile()
+            Tile.GrassTile(), Tile.StepTile(Tile.Orientation.VERTICAL, 4), Tile.GrassTile(), Tile.GrassTile(),
+            Tile.TopToLeftTile, Tile.BottomToLeftTile, Tile.GrassTile(hasTree = true), Tile.GrassTile(hasTree = true),
+            Tile.StepTile(Tile.Orientation.VERTICAL, 5), Tile.GrassTile(), Tile.GrassTile(hasTree = true), Tile.GrassTile(hasTree = true),
+            Tile.BottomToRightTile, Tile.RoadHorizontalTile, Tile.TopToRightTile, Tile.GrassTile(),
+            Tile.GrassTile(), Tile.GrassTile(hasTree = true), Tile.RoadVerticalTile, Tile.GrassTile(),
+            Tile.GrassTile(), Tile.TopToLeftTile, Tile.BottomToLeftTile, Tile.GrassTile(),
+            Tile.GrassTile(), Tile.RoadVerticalTile, Tile.GrassTile(), Tile.GrassTile(hasTree = true)
         ))
     }
 }
