@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import br.andersonpimentel.littleelephant.domain.entities.Map
 import br.andersonpimentel.littleelephant.domain.entities.Tile
 import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
+import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase.ResultMap
 import br.andersonpimentel.littleelephant.domain.usecases.SetLastElephantPositionUseCase
 import br.andersonpimentel.littleelephant.presentation.feature.viewmodel.ViewState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,24 +23,21 @@ class MainViewModel(
 ) : ViewModel() {
 
     private val _state = MutableLiveData<ViewState<Map>>().apply {
-        value = ViewState.Loading
+            value = ViewState.Loading
     }
     var state: LiveData<ViewState<Map>> = _state
 
-    init {
-        getMap()
-    }
-
-    private fun getMap() {
+    fun getMap() {
         viewModelScope.launch(dispatcher) {
-            try {
-                getMapUseCase().flowOn(Dispatchers.IO)
-                    .collect { map ->
-                        _state.postValue(ViewState.Success(map))
+            getMapUseCase()
+                .flowOn(Dispatchers.IO)
+                .collect { result ->
+                    when(result){
+                        is ResultMap.Success -> _state.postValue(ViewState.Success(result.map))
+                        is ResultMap.MapIsEmpty -> _state.postValue(ViewState.Failed)
+                        is ResultMap.Error -> _state.postValue(ViewState.Failed)
                     }
-            }catch (e: Throwable){
-                _state.postValue(ViewState.Failed)
-            }
+                }
         }
     }
 
@@ -48,5 +46,4 @@ class MainViewModel(
             setLastElephantPositionUseCase(tile)
         }
     }
-
 }
