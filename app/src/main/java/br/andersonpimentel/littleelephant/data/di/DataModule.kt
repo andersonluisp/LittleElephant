@@ -14,7 +14,7 @@ val repositoryModule = module {
             messagesCacheDataSource = get(),
             dateCacheValidateDataSource = get(),
             remoteDataSource = get(),
-            successRemoteFetch = get()
+            onSuccessRemoteFetch = get()
         )
     }
 
