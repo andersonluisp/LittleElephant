@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LittleElephant</string>
+    <string name="empty_step_message">This step does not have a message</string>
 </resources>
