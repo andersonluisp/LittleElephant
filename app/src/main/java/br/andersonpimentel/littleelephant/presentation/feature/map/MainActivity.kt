@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setContentView(binding.root)
-        setupAdapter()
         setupTooltip()
         setupObservers()
+        viewModel.getMap()
     }
 
     override fun onResume() {
@@ -59,15 +59,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setupAdapter() {
-        adapter = MapTilesAdapter { view, stepTile ->
+    private fun setupAdapter(spanCount: Int) {
+        adapter = MapTilesAdapter(spanCount) { view, stepTile ->
             if (!stepTile.hasElephant) {
                 tooltipBinding.setMessage(stepTile.message.toString())
                 viewModel.setLastElephantPosition(stepTile)
                 if (tooltip.isShowing) {
                     tooltip.dismiss()
                 }
-                tooltip.showToolTip(view)
+                if (stepTile.message != null){
+                    tooltip.showToolTip(view)
+                } else {
+                    Toast.makeText(this, getString(R.string.empty_step_message), Toast.LENGTH_SHORT).show()
+                }
             } else {
                 tooltip.showToolTip(view)
             }
@@ -77,8 +81,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel.state.observe(this) {
             if (it is ViewState.Success) {
+                setupAdapter(it.data.spanCount)
                 adapter.items = it.data.tiles
-                setupRecyclerview()
+                setupRecyclerview(it.data.spanCount)
             }
         }
     }
@@ -108,9 +113,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerview() {
+    private fun setupRecyclerview(spanCount: Int) {
         binding.rvMap.let {
-            it.layoutManager = GridLayoutManager(this, 4).apply {
+            it.layoutManager = GridLayoutManager(this, spanCount).apply {
                 reverseLayout = true
             }
             it.itemAnimator = null
