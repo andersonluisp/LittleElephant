@@ -9,11 +9,12 @@ import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
 object TileGrassAdapterDelegate {
-    operator fun invoke(itemClickListener: (Tile.GrassTile) -> Unit) =
+    operator fun invoke(spanCount: Int, itemClickListener: (Tile.GrassTile) -> Unit) =
         adapterDelegateViewBinding<Tile.GrassTile, Tile, ItemTileLayoutBinding>(
             { layoutInflater, root -> ItemTileLayoutBinding.inflate(layoutInflater, root, false) }
         ) {
             bind {
+                setupTileSize(spanCount, binding)
                 Glide.with(context)
                     .load(R.drawable.tile_grass)
                     .into(binding.ivTile)
@@ -35,4 +36,11 @@ object TileGrassAdapterDelegate {
                 }
             }
         }
+    private fun setupTileSize(spanCount: Int, binding: ItemTileLayoutBinding){
+        val widthScreenSize = binding.root.resources.displayMetrics.widthPixels
+        val layoutParams = binding.itemTileLayout.layoutParams
+        layoutParams.width = widthScreenSize / spanCount
+        layoutParams.height = widthScreenSize / spanCount
+        binding.itemTileLayout.layoutParams = layoutParams
+    }
 }

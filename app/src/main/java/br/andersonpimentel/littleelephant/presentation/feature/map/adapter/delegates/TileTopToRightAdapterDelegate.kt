@@ -7,14 +7,22 @@ import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
 object TileTopToRightAdapterDelegate {
-    operator fun invoke(itemClickListener: (Tile.TopToRightTile) -> Unit) =
+    operator fun invoke(spanCount: Int, itemClickListener: (Tile.TopToRightTile) -> Unit) =
         adapterDelegateViewBinding<Tile.TopToRightTile, Tile, ItemTileLayoutBinding>(
             { layoutInflater, root -> ItemTileLayoutBinding.inflate(layoutInflater, root, false) }
         ) {
+            setupTileSize(spanCount, binding)
             bind {
                 Glide.with(context)
                     .load(R.drawable.tile_top_right)
                     .into(binding.ivTile)
             }
         }
+    private fun setupTileSize(spanCount: Int, binding: ItemTileLayoutBinding){
+        val widthScreenSize = binding.root.resources.displayMetrics.widthPixels
+        val layoutParams = binding.itemTileLayout.layoutParams
+        layoutParams.width = widthScreenSize / spanCount
+        layoutParams.height = widthScreenSize / spanCount
+        binding.itemTileLayout.layoutParams = layoutParams
+    }
 }
