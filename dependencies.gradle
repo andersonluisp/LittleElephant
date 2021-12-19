@@ -23,10 +23,13 @@ ext {
     balloonVersion = '1.4.0'
 
     //Test
-    junitVersion = '4.+'
+    junitVersion = '4.13.2'
+    mockkVersion = '1.10.2'
     extJunitVersion = '1.1.3'
+    truthVersion = '1.1.3'
     espressoVersion = '3.4.0'
     runnerVersion = '1.4.0'
+    androidCoreVersion = '2.1.0'
 
     dependencies = [
             ktx: "androidx.core:core-ktx:$ktxVersion",
@@ -73,6 +76,11 @@ ext {
             extJunit: "androidx.test.ext:$extJunitVersion",
             espresso: "androidx.test.espresso:$espressoVersion",
             koinTest: "org.koin:koin-test:$koinVersion",
-            runner: "androidx.test:runner:$runnerVersion"
+            truth: "com.google.truth:truth:$truthVersion",
+            truthJava: "com.google.truth.extensions:truth-java8-extension:$truthVersion",
+            coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion",
+            mockk: "io.mockk:mockk:$mockkVersion",
+            runner: "androidx.test:runner:$runnerVersion",
+            androidCore: "androidx.arch.core:core-testing:$androidCoreVersion"
     ]
 }

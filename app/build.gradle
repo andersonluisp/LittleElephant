@@ -73,6 +73,11 @@ dependencies {
 
 
     testImplementation testDependencies.junit
+    testImplementation testDependencies.truth
+    testImplementation testDependencies.truthJava
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.androidCore
     androidTestImplementation testDependencies.runner
     androidTestImplementation testDependencies.espresso
 }
