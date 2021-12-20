@@ -12,13 +12,14 @@ fun ImageView.load(image: Any){
         .into(this)
 }
 
-fun Balloon.showToolTip(view: View){
+fun Balloon.showToolTip(tooltip:View, anchorView: View){
     val viewPosition = IntArray(2)
-    view.getLocationOnScreen(viewPosition)
-    if (viewPosition[1] > 510){
-        this.showAlignTop(view)
+    anchorView.getLocationOnScreen(viewPosition)
+    val tooltipHeight = tooltip.layoutParams.height
+    if (viewPosition[1] > tooltipHeight + anchorView.layoutParams.height){
+        this.showAlignTop(anchorView)
     } else {
-        this.showAlignBottom(view)
+        this.showAlignBottom(anchorView)
     }
 }
 

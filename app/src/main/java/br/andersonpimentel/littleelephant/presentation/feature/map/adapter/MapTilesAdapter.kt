@@ -6,26 +6,26 @@ import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.deleg
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.diffutil.TileDiffUtilCallback
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
-class MapTilesAdapter(spanCount: Int, showToolTip: (View, Tile.StepTile) -> Unit) :
+class MapTilesAdapter(showToolTip: (View, Tile.StepTile) -> Unit) :
     AsyncListDifferDelegationAdapter<Tile>(TileDiffUtilCallback()) {
 
-    var elephantStepPosition: Tile.StepTile? = null
+    private var elephantStepPosition: Tile.StepTile? = null
 
     init {
         with(delegatesManager) {
-            addDelegate(TileGrassAdapterDelegate(spanCount) {})
+            addDelegate(TileGrassAdapterDelegate {})
             addDelegate(
-                TileStepAdapterDelegate(spanCount, itemClickListener = { view, item ->
+                TileStepAdapterDelegate(itemClickListener = { view, item ->
                     showToolTip(view, item)
                     onChangeElephantStepPosition(item)
                 })
             )
-            addDelegate(TileBottomToLeftAdapterDelegate(spanCount) {})
-            addDelegate(TileBottomToRightAdapterDelegate(spanCount) {})
-            addDelegate(TileRoadHorizontalAdapterDelegate(spanCount) {})
-            addDelegate(TileRoadVerticalAdapterDelegate(spanCount) {})
-            addDelegate(TileTopToLeftAdapterDelegate(spanCount) {})
-            addDelegate(TileTopToRightAdapterDelegate(spanCount) {})
+            addDelegate(TileBottomToLeftAdapterDelegate {})
+            addDelegate(TileBottomToRightAdapterDelegate {})
+            addDelegate(TileRoadHorizontalAdapterDelegate {})
+            addDelegate(TileRoadVerticalAdapterDelegate {})
+            addDelegate(TileTopToLeftAdapterDelegate {})
+            addDelegate(TileTopToRightAdapterDelegate {})
         }
     }
 
