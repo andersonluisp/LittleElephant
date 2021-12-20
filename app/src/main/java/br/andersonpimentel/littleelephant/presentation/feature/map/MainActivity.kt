@@ -7,11 +7,13 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.andersonpimentel.littleelephant.R
 import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
 import br.andersonpimentel.littleelephant.databinding.TooltipLayoutBinding
+import br.andersonpimentel.littleelephant.domain.entities.Map
 import br.andersonpimentel.littleelephant.presentation.feature.map.adapter.MapTilesAdapter
 import br.andersonpimentel.littleelephant.presentation.feature.viewmodel.ViewState
 import br.andersonpimentel.littleelephant.presentation.util.setMessage
@@ -59,32 +61,30 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setupAdapter(spanCount: Int) {
-        adapter = MapTilesAdapter(spanCount) { view, stepTile ->
-            if (!stepTile.hasElephant) {
-                tooltipBinding.setMessage(stepTile.message.toString())
-                viewModel.setLastElephantPosition(stepTile)
-                if (tooltip.isShowing) {
-                    tooltip.dismiss()
-                }
-                if (stepTile.message != null){
-                    tooltip.showToolTip(view)
+    private fun setupAdapter() {
+        adapter = MapTilesAdapter { view, stepTile ->
+            if(stepTile.message == null){
+                Toast.makeText(this, getString(R.string.empty_step_message), Toast.LENGTH_SHORT)
+                    .show()
+            } else{
+                if (!stepTile.hasElephant) {
+                    viewModel.setLastElephantPosition(stepTile)
+                    if (tooltip.isShowing) {
+                        tooltip.dismiss()
+                    }
+                    tooltipBinding.setMessage(stepTile.message.toString())
+                    tooltip.showToolTip(tooltipBinding.layoutBalloon, view)
                 } else {
-                    Toast.makeText(this, getString(R.string.empty_step_message), Toast.LENGTH_SHORT).show()
+                    tooltipBinding.setMessage(stepTile.message.toString())
+                    tooltip.showToolTip(tooltipBinding.layoutBalloon, view)
                 }
-            } else {
-                tooltip.showToolTip(view)
             }
         }
     }
 
     private fun setupObservers() {
         viewModel.state.observe(this) {
-            if (it is ViewState.Success) {
-                setupAdapter(it.data.spanCount)
-                adapter.items = it.data.tiles
-                setupRecyclerview(it.data.spanCount)
-            }
+            showViewState(it)
         }
     }
 
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
             setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
             setCornerRadius(10f)
             setAlpha(0.9f)
-            setPaddingHorizontal(10)
             setBackgroundColorResource(R.color.white)
             setBalloonAnimation(BalloonAnimation.FADE)
             setDismissWhenTouchOutside(false)
@@ -110,6 +109,39 @@ class MainActivity : AppCompatActivity() {
     private fun setupTooltipListener(balloon: Balloon) {
         tooltipBinding.root.button.setOnClickListener {
             balloon.dismiss()
+        }
+    }
+
+    private fun showViewState(viewState: ViewState<Map>) {
+        binding.apply {
+            when (viewState) {
+                is ViewState.Success -> {
+                    setupAdapter()
+                    adapter.items = viewState.data.tiles
+                    setupRecyclerview(viewState.data.spanCount)
+                    lottieProgress.isVisible = false
+                    lottieProgress.cancelAnimation()
+                    rvMap.isVisible = true
+                    noMap.isVisible = false
+                    tvNoMap.isVisible = false
+                    noMap.cancelAnimation()
+                }
+                is ViewState.Loading -> {
+                    lottieProgress.isVisible = true
+                    lottieProgress.playAnimation()
+                    noMap.isVisible = false
+                    tvNoMap.isVisible = false
+                    noMap.cancelAnimation()
+                    rvMap.isVisible = false
+                }
+                is ViewState.Failed -> {
+                    lottieProgress.isVisible = false
+                    lottieProgress.cancelAnimation()
+                    tvNoMap.isVisible = true
+                    noMap.playAnimation()
+                    noMap.isVisible = true
+                }
+            }
         }
     }
 
@@ -131,7 +163,7 @@ class MainActivity : AppCompatActivity() {
 
     inner class ApiBroadcastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Toast.makeText(context, "Api OK", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.api_ok), Toast.LENGTH_LONG).show()
         }
     }
 }

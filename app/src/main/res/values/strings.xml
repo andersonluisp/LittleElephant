@@ -6,4 +6,5 @@
     <string name="content_desc_step_tile">Step tile</string>
     <string name="content_desc_tile">Tile</string>
     <string name="no_map">The map cannot be loaded.\n Try again later!</string>
+    <string name="api_ok">Api OK</string>
 </resources>
