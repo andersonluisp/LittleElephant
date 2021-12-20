@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="no_map_text">32sp</dimen>
+    <dimen name="tooltip_width">450dp</dimen>
+    <dimen name="tooltip_height">250dp</dimen>
+    <dimen name="tooltip_message">26sp</dimen>
+    <dimen name="tooltip_button_text_size">26sp</dimen>
+    <dimen name="tooltip_button_width">150dp</dimen>
+    <dimen name="tooltip_button_height">75dp</dimen>
+</resources>

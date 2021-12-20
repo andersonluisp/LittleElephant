@@ -1,39 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_balloon"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250dp"
-    android:layout_height="match_parent"
-    android:padding="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="@dimen/tooltip_width"
+    android:layout_height="@dimen/tooltip_height"
+    android:padding="20dp">
 
-    <ScrollView
-        android:id="@+id/message_container"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="3"
+        android:textColor="@color/black"
+        android:textSize="@dimen/tooltip_message"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-        <TextView
-            android:id="@+id/tv_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras venenatis, eros ac elementum faucibus, velit est eleifend nunc, eu blandit massa ante in enim"
-            />
-    </ScrollView>
+        app:layout_constraintBottom_toTopOf="@id/button"
+        tools:text="@string/lorem_ipsum" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_button_start"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_button_end"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/tooltip_button_width"
+        android:layout_height="@dimen/tooltip_button_height"
+        android:background="@drawable/rounded_corner"
+        app:backgroundTint="@color/button_color"
         android:layout_marginTop="16dp"
-        android:text="Ok"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/message_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:textStyle="bold"
+        android:textSize="@dimen/tooltip_button_text_size"
+        android:text="@string/button_ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guide_button_end"
+        app:layout_constraintStart_toStartOf="@id/guide_button_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

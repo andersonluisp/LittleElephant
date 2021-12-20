@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">LittleElephant</string>
     <string name="empty_step_message">This step does not have a message</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras venenatis, eros ac elementum faucibus, velit est eleifend nunc, eu blandit massa ante in enim</string>
+    <string name="button_ok">OK</string>
+    <string name="content_desc_step_tile">Step tile</string>
+    <string name="content_desc_tile">Tile</string>
+    <string name="no_map">The map cannot be loaded.\n Try again later!</string>
 </resources>
