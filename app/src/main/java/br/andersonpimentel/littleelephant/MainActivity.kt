@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.andersonpimentel.littleelephant.databinding.ActivityMainBinding
-import br.andersonpimentel.littleelephant.map.presentation.view.activity.MapActivity
+import br.andersonpimentel.littleelephant.map.view.activity.MapActivity
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.view.adapter.diffutil
+package br.andersonpimentel.littleelephant.map.view.adapter.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
 import br.andersonpimentel.littleelephant.domain.entities.Tile

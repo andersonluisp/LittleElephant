@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.view.viewmodel
+package br.andersonpimentel.littleelephant.map.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.view.activity
+package br.andersonpimentel.littleelephant.map.view.activity
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,11 +14,11 @@ import br.andersonpimentel.littleelephant.domain.entities.Map
 import br.andersonpimentel.littleelephant.map.R
 import br.andersonpimentel.littleelephant.map.databinding.ActivityMapBinding
 import br.andersonpimentel.littleelephant.map.databinding.TooltipLayoutBinding
-import br.andersonpimentel.littleelephant.map.presentation.util.setMessage
-import br.andersonpimentel.littleelephant.map.presentation.util.showToolTip
-import br.andersonpimentel.littleelephant.map.presentation.view.adapter.MapTilesAdapter
-import br.andersonpimentel.littleelephant.map.presentation.view.viewmodel.MapViewModel
-import br.andersonpimentel.littleelephant.map.presentation.view.viewmodel.ViewState
+import br.andersonpimentel.littleelephant.map.util.setMessage
+import br.andersonpimentel.littleelephant.map.util.showToolTip
+import br.andersonpimentel.littleelephant.map.view.adapter.MapTilesAdapter
+import br.andersonpimentel.littleelephant.map.view.viewmodel.MapViewModel
+import br.andersonpimentel.littleelephant.map.view.viewmodel.ViewState
 import com.skydoves.balloon.*
 import kotlinx.android.synthetic.main.tooltip_layout.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

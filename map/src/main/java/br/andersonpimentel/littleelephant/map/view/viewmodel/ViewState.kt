@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.view.viewmodel
+package br.andersonpimentel.littleelephant.map.view.viewmodel
 
 sealed class ViewState<out T> {
     object Loading: ViewState<Nothing>()

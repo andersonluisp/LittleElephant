@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".map.presentation.view.activity.MapActivity"/>
+        <activity android:name=".map.view.activity.MapActivity"/>
     </application>
 
 </manifest>

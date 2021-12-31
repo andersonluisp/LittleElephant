@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.view.adapter.delegates
+package br.andersonpimentel.littleelephant.map.view.adapter.delegates
 
 import android.transition.TransitionManager
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import br.andersonpimentel.littleelephant.domain.entities.Tile
 import br.andersonpimentel.littleelephant.map.R
 import br.andersonpimentel.littleelephant.map.databinding.ItemStepLayoutBinding
-import br.andersonpimentel.littleelephant.map.presentation.util.load
+import br.andersonpimentel.littleelephant.map.util.load
 import com.airbnb.lottie.LottieDrawable
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
