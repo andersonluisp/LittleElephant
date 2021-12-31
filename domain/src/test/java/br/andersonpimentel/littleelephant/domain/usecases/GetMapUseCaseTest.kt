@@ -1,16 +1,11 @@
-package br.andersonpimentel.littleelephant.domain.usecase
+package br.andersonpimentel.littleelephant.domain.usecases
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import br.andersonpimentel.littleelephant.domain.entities.Map
 import br.andersonpimentel.littleelephant.domain.entities.Message
 import br.andersonpimentel.littleelephant.domain.entities.Tile
-import br.andersonpimentel.littleelephant.domain.usecases.GetLastElephantPositionUseCase
 import br.andersonpimentel.littleelephant.domain.usecases.GetLastElephantPositionUseCase.ResultElephantPosition
-import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
 import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase.ResultMap
-import br.andersonpimentel.littleelephant.domain.usecases.GetStepMessagesUseCase
 import br.andersonpimentel.littleelephant.domain.usecases.GetStepMessagesUseCase.ResultMessages
-import br.andersonpimentel.littleelephant.domain.usecases.GetTilesUseCase
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -19,17 +14,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 
 @ExperimentalCoroutinesApi
 class GetMapUseCaseTest {
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
 
     @MockK
     private lateinit var getStepMessagesUseCase: GetStepMessagesUseCase
@@ -132,7 +122,7 @@ class GetMapUseCaseTest {
             // When
             val resultMap = getMapUseCase()
             // Then
-            assertThat(resultMap.last()).isInstanceOf(ResultMap.MapIsEmpty::class.java)
+            assertThat(resultMap.first()).isInstanceOf(ResultMap.MapIsEmpty::class.java)
         }
 
     @Test
@@ -156,6 +146,6 @@ class GetMapUseCaseTest {
             // When
             val resultMap = getMapUseCase()
             // Then
-            assertThat(resultMap.last()).isInstanceOf(ResultMap.Error::class.java)
+            assertThat(resultMap.first()).isInstanceOf(ResultMap.Error::class.java)
         }
 }
