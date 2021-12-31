@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.util
+package br.andersonpimentel.littleelephant.map.util
 
 import android.view.View
 import android.widget.ImageView

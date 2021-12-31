@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.map.presentation.view.adapter.delegates
+package br.andersonpimentel.littleelephant.map.view.adapter.delegates
 
 import br.andersonpimentel.littleelephant.domain.entities.Tile
 import br.andersonpimentel.littleelephant.map.R
