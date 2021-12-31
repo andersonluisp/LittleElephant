@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.andersonpimentel.littleelephant.domain.entities.Map
+import br.andersonpimentel.littleelephant.entities.Map
 import br.andersonpimentel.littleelephant.map.R
 import br.andersonpimentel.littleelephant.map.databinding.ActivityMapBinding
 import br.andersonpimentel.littleelephant.map.databinding.TooltipLayoutBinding

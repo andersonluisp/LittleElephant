@@ -1,7 +1,7 @@
 package br.andersonpimentel.littleelephant.map.view.adapter
 
 import android.view.View
-import br.andersonpimentel.littleelephant.domain.entities.Tile
+import br.andersonpimentel.littleelephant.entities.Tile
 import br.andersonpimentel.littleelephant.map.view.adapter.delegates.*
 import br.andersonpimentel.littleelephant.map.view.adapter.diffutil.TileDiffUtilCallback
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
