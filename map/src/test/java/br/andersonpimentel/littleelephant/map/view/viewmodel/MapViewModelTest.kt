@@ -1,4 +1,4 @@
-package br.andersonpimentel.littleelephant.presentation.feature.map.viewmodel
+package br.andersonpimentel.littleelephant.map.view.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -7,8 +7,6 @@ import br.andersonpimentel.littleelephant.domain.entities.Tile
 import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
 import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase.ResultMap
 import br.andersonpimentel.littleelephant.domain.usecases.SetLastElephantPositionUseCase
-import br.andersonpimentel.littleelephant.map.view.viewmodel.MapViewModel
-import br.andersonpimentel.littleelephant.map.view.viewmodel.ViewState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
