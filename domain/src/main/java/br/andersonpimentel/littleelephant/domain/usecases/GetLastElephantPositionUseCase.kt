@@ -1,6 +1,6 @@
 package br.andersonpimentel.littleelephant.domain.usecases
 
-import br.andersonpimentel.littleelephant.data.repository.ElephantPositionRepository
+import br.andersonpimentel.littleelephant.domain.repository.ElephantPositionRepository
 import br.andersonpimentel.littleelephant.domain.responses.ResultRequired
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

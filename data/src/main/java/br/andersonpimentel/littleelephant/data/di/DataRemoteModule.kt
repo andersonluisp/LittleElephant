@@ -1,6 +1,5 @@
 package br.andersonpimentel.littleelephant.data.di
 
-import br.andersonpimentel.littleelephant.BuildConfig
 import br.andersonpimentel.littleelephant.data.remote.api.ServerApi
 import br.andersonpimentel.littleelephant.data.remote.source.RemoteDataSource
 import okhttp3.OkHttpClient
@@ -19,9 +18,10 @@ val remoteDataSourceModule = module {
 }
 
 inline fun <reified T> createWebService(okHttpClient: OkHttpClient): T {
+    val baseUrl  ="https://cat-fact.herokuapp.com"
     return Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BuildConfig.BASE_URL)
+        .baseUrl(baseUrl)
         .client(okHttpClient)
         .build()
         .create(T::class.java)

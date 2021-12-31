@@ -3,8 +3,8 @@ package br.andersonpimentel.littleelephant.domain.usecases
 import br.andersonpimentel.littleelephant.domain.entities.Map
 import br.andersonpimentel.littleelephant.domain.entities.Tile
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.zip
 
 class GetMapUseCase(
@@ -15,7 +15,7 @@ class GetMapUseCase(
     suspend operator fun invoke(): Flow<ResultMap> {
 
         return  try {
-            flowOf(if(useCaseGetTiles().last().isNullOrEmpty()){
+            flowOf(if(useCaseGetTiles().first().isNullOrEmpty()){
                 ResultMap.MapIsEmpty
             } else{
                 ResultMap.Success(map = Map(
@@ -39,7 +39,7 @@ class GetMapUseCase(
                                 }
                             }
                         }
-                    }.last()
+                    }.first()
                 , spanCount = 4
                 ))
             })

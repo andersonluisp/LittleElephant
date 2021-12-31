@@ -4,6 +4,7 @@ import android.util.Log
 import br.andersonpimentel.littleelephant.data.local.source.ElephantPositionDataSource
 import br.andersonpimentel.littleelephant.data.local.util.toElephantPosition
 import br.andersonpimentel.littleelephant.domain.entities.Tile
+import br.andersonpimentel.littleelephant.domain.repository.ElephantPositionRepository
 import br.andersonpimentel.littleelephant.domain.responses.ResultRequired
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -11,12 +12,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class ElephantPositionRepository(
+class ElephantPositionRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val elephantPositionDataSource: ElephantPositionDataSource
-) {
+):ElephantPositionRepository {
 
-    fun getLastElephantPosition(): Flow<ResultRequired<Int>> {
+    override fun getLastElephantPosition(): Flow<ResultRequired<Int>> {
         return elephantPositionDataSource.getLastElephantPosition()
             .map { lastElephantStep ->
                 val result = try {
@@ -39,7 +40,7 @@ class ElephantPositionRepository(
 
     }
 
-    suspend fun setLastElephantPosition(tile: Tile.StepTile) {
+    override suspend fun setLastElephantPosition(tile: Tile.StepTile) {
         withContext(dispatcher) {
             Log.i(
                 "***LittleElephant",
@@ -48,5 +49,4 @@ class ElephantPositionRepository(
             elephantPositionDataSource.updateLastElephantPosition(tile.toElephantPosition())
         }
     }
-
 }

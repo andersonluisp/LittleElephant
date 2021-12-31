@@ -9,6 +9,7 @@ import br.andersonpimentel.littleelephant.data.remote.source.RemoteDataSource
 import br.andersonpimentel.littleelephant.data.remote.util.SuccessRemoteFetch
 import br.andersonpimentel.littleelephant.data.remote.util.toMessageModel
 import br.andersonpimentel.littleelephant.domain.entities.Message
+import br.andersonpimentel.littleelephant.domain.repository.MessagesRepository
 import br.andersonpimentel.littleelephant.domain.responses.ResultRemote
 import br.andersonpimentel.littleelephant.domain.responses.ResultRequired
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,13 +21,32 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class MessagesRepository(
+class MessagesRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val messagesCacheDataSource: MessagesCacheDataSource,
     private val dateCacheValidateDataSource: DateCacheValidateDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val onSuccessRemoteFetch: SuccessRemoteFetch
-) {
+): MessagesRepository {
+
+    override suspend fun getMessages(): Flow<ResultRequired<List<Message>>> {
+        return if(shouldFetchRemoteMessages()){
+            flowOf(getFactsRemote())
+        } else {
+            messagesCacheDataSource.getMessages()
+                .map { cacheList ->
+                    val result = when {
+                        cacheList.isEmpty() -> getFactsRemote()
+                        else -> {
+                            val messages = cacheList.toModel()
+                            ResultRequired.Success(messages)
+                        }
+                    }
+                    result
+                }
+        }
+    }
+
     private suspend fun getFactsRemote(): ResultRequired<List<Message>> {
         return withContext(dispatcher) {
             when (val resultRemote = remoteDataSource.fetchMessages()) {
@@ -46,24 +66,6 @@ class MessagesRepository(
                     ResultRequired.Error(resultRemote.throwable)
                 }
             }
-        }
-    }
-
-    suspend fun getMessages(): Flow<ResultRequired<List<Message>>> {
-        return if(shouldFetchRemoteMessages()){
-            flowOf(getFactsRemote())
-        } else {
-            messagesCacheDataSource.getMessages()
-                .map { cacheList ->
-                    val result = when {
-                        cacheList.isEmpty() -> getFactsRemote()
-                        else -> {
-                                val messages = cacheList.toModel()
-                                ResultRequired.Success(messages)
-                        }
-                    }
-                    result
-                }
         }
     }
 

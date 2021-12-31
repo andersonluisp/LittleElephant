@@ -1,7 +1,7 @@
 package br.andersonpimentel.littleelephant.domain.usecases
 
-import br.andersonpimentel.littleelephant.data.repository.MessagesRepository
 import br.andersonpimentel.littleelephant.domain.entities.Message
+import br.andersonpimentel.littleelephant.domain.repository.MessagesRepository
 import br.andersonpimentel.littleelephant.domain.responses.ResultRequired
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

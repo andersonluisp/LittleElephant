@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LittleElephant"
 include ':app'
+include ':data'
+include ':domain'

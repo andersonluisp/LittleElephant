@@ -1,16 +1,18 @@
 package br.andersonpimentel.littleelephant.data.di
 
 import br.andersonpimentel.littleelephant.data.remote.util.SuccessRemoteFetch
-import br.andersonpimentel.littleelephant.data.repository.ElephantPositionRepository
-import br.andersonpimentel.littleelephant.data.repository.MessagesRepository
+import br.andersonpimentel.littleelephant.data.repository.ElephantPositionRepositoryImpl
+import br.andersonpimentel.littleelephant.data.repository.MessagesRepositoryImpl
+import br.andersonpimentel.littleelephant.domain.repository.ElephantPositionRepository
+import br.andersonpimentel.littleelephant.domain.repository.MessagesRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val repositoryModule = module {
     factory { SuccessRemoteFetch(context = androidContext()) }
 
-    factory {
-        MessagesRepository(
+    factory<MessagesRepository> {
+        MessagesRepositoryImpl(
             messagesCacheDataSource = get(),
             dateCacheValidateDataSource = get(),
             remoteDataSource = get(),
@@ -18,8 +20,8 @@ val repositoryModule = module {
         )
     }
 
-    factory {
-        ElephantPositionRepository(
+    factory<ElephantPositionRepository> {
+        ElephantPositionRepositoryImpl(
             elephantPositionDataSource = get()
         )
     }
