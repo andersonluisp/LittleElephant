@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context=".presentation.feature.map.MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_progress_start"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_progress_end"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_no_map_start"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_no_map_top"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_no_map_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_no_map_end"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="1.7"
+        app:lottie_repeatMode="restart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guide_progress_start"
+        app:layout_constraintEnd_toEndOf="@id/guide_progress_end"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_map"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:lottie_rawRes="@raw/no_map"
+        app:lottie_loop="true"
+        app:lottie_speed="1.7"
+        app:lottie_repeatMode="restart"
+        app:layout_constraintTop_toTopOf="@id/guide_no_map_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_no_map_bottom"
+        app:layout_constraintStart_toStartOf="@id/guide_no_map_start"
+        app:layout_constraintEnd_toEndOf="@id/guide_no_map_end"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_no_map"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/no_map_text"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="@string/no_map"
+        app:layout_constraintTop_toBottomOf="@id/no_map"
+        app:layout_constraintStart_toStartOf="@id/guide_no_map_start"
+        app:layout_constraintEnd_toEndOf="@id/guide_no_map_end"
+        android:visibility="visible"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_map"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_tile_layout"
+        tools:itemCount="10"
+        android:overScrollMode="never"
+        tools:spanCount="4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+</androidx.constraintlayout.widget.ConstraintLayout>
