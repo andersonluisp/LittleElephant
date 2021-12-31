@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
+
+dependencies {
+
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    implementation dependencies.coroutinesCore
+    implementation dependencies.coroutinesAndroid
+    implementation dependencies.koin
+    implementation dependencies.koinViewModel
+    implementation dependencies.koinCore
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.truth
+    testImplementation testDependencies.truthJava
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.androidCore
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

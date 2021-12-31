@@ -32,6 +32,7 @@ ext {
     androidCoreVersion = '2.1.0'
 
     dependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
             ktx: "androidx.core:core-ktx:$ktxVersion",
             appCompat: "androidx.appcompat:appcompat:$appCompatVersion",
             coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion",
