@@ -20,7 +20,7 @@ object TileStepAdapterDelegate {
                     ivTile.load(setStepTileDrawable(item))
                     tvStepNumber.text = item.step.toString()
                     root.setOnClickListener {
-                        itemClickListener(lavElephant, item)
+                        itemClickListener(tvStepNumber, item)
                     }
                     showElephant(item, this)
                 }
