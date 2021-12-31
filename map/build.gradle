@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
@@ -11,11 +11,8 @@ android {
     compileSdk globalConfiguration["compileSDK"]
 
     defaultConfig {
-        applicationId "br.andersonpimentel.littleelephant"
         minSdk globalConfiguration["minSDK"]
         targetSdk globalConfiguration["targetSDK"]
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,7 +22,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
         debug {
         }
     }
@@ -46,7 +42,6 @@ dependencies {
 
     implementation project(path: ':data')
     implementation project(path: ':domain')
-    implementation project(path: ':map')
 
 
     def dependencies = rootProject.ext.dependencies
@@ -54,11 +49,25 @@ dependencies {
 
     implementation dependencies.ktx
     implementation dependencies.appCompat
+    implementation dependencies.coroutinesCore
+    implementation dependencies.coroutinesAndroid
+    implementation dependencies.viewModel
     implementation dependencies.material
     implementation dependencies.constraintLayout
     implementation dependencies.koin
     implementation dependencies.koinCore
     implementation dependencies.koinViewModel
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitGsonConverter
+    implementation dependencies.gson
+    implementation dependencies.room
+    kapt dependencies.roomCompiler
+    implementation dependencies.roomKtx
+    implementation dependencies.glide
+    annotationProcessor dependencies.glideCompiler
+    implementation dependencies.adapterDelegates
+    implementation dependencies.lottie
+    implementation dependencies.balloon
 
 
     testImplementation testDependencies.junit
