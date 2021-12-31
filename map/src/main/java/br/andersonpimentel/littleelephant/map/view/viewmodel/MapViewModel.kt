@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.andersonpimentel.littleelephant.domain.entities.Map
-import br.andersonpimentel.littleelephant.domain.entities.Tile
-import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
-import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase.ResultMap
-import br.andersonpimentel.littleelephant.domain.usecases.SetLastElephantPositionUseCase
+import br.andersonpimentel.littleelephant.entities.Map
+import br.andersonpimentel.littleelephant.entities.Tile
+import br.andersonpimentel.littleelephant.usecases.GetMapUseCase
+import br.andersonpimentel.littleelephant.usecases.GetMapUseCase.ResultMap
+import br.andersonpimentel.littleelephant.usecases.SetLastElephantPositionUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

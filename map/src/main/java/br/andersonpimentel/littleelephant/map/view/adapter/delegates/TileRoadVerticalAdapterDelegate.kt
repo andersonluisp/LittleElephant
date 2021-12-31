@@ -1,6 +1,6 @@
 package br.andersonpimentel.littleelephant.map.view.adapter.delegates
 
-import br.andersonpimentel.littleelephant.domain.entities.Tile
+import br.andersonpimentel.littleelephant.entities.Tile
 import br.andersonpimentel.littleelephant.map.R
 import br.andersonpimentel.littleelephant.map.databinding.ItemTileLayoutBinding
 import com.bumptech.glide.Glide

@@ -2,11 +2,11 @@ package br.andersonpimentel.littleelephant.map.view.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import br.andersonpimentel.littleelephant.domain.entities.Map
-import br.andersonpimentel.littleelephant.domain.entities.Tile
-import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase
-import br.andersonpimentel.littleelephant.domain.usecases.GetMapUseCase.ResultMap
-import br.andersonpimentel.littleelephant.domain.usecases.SetLastElephantPositionUseCase
+import br.andersonpimentel.littleelephant.entities.Map
+import br.andersonpimentel.littleelephant.entities.Tile
+import br.andersonpimentel.littleelephant.usecases.GetMapUseCase
+import br.andersonpimentel.littleelephant.usecases.GetMapUseCase.ResultMap
+import br.andersonpimentel.littleelephant.usecases.SetLastElephantPositionUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify

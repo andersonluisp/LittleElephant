@@ -3,7 +3,7 @@ package br.andersonpimentel.littleelephant.map.view.adapter.delegates
 import android.transition.TransitionManager
 import android.view.View
 import androidx.core.view.isVisible
-import br.andersonpimentel.littleelephant.domain.entities.Tile
+import br.andersonpimentel.littleelephant.entities.Tile
 import br.andersonpimentel.littleelephant.map.R
 import br.andersonpimentel.littleelephant.map.databinding.ItemStepLayoutBinding
 import br.andersonpimentel.littleelephant.map.util.load
